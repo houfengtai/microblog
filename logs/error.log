@@ -1,0 +1,306 @@
+[Wed Nov 29 2017 14:39:05 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Wed Nov 29 2017 14:39:18 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 11:35:46 GMT+0800 (中国标准时间)] /favicon.ico
+Error: Not Found
+    at D:\workspace\microblog\app.js:54:13
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\workspace\microblog\node_modules\express\lib\router\index.js:317:13)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\index.js:275:10)
+    at D:\workspace\microblog\node_modules\express-session\index.js:489:7
+    at tryCatcher (D:\workspace\microblog\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise.successAdapter [as _fulfillmentHandler0] (D:\workspace\microblog\node_modules\bluebird\js\release\nodeify.js:23:30)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:566:21)
+    at Promise._settlePromise0 (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:693:18)
+    at Promise._fulfill (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:638:18)
+    at Promise._resolveCallback (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:432:57)
+    at Promise._settlePromiseFromHandler (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:524:17)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:569:18)
+[Thu Nov 30 2017 11:36:25 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 11:43:19 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 11:45:16 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 11:49:06 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 11:50:11 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 11:52:29 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 11:52:33 GMT+0800 (中国标准时间)] /favicon.ico
+Error: Not Found
+    at D:\workspace\microblog\app.js:54:13
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (D:\workspace\microblog\node_modules\express\lib\router\index.js:317:13)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\index.js:275:10)
+    at D:\workspace\microblog\node_modules\express-session\index.js:489:7
+    at tryCatcher (D:\workspace\microblog\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise.successAdapter [as _fulfillmentHandler0] (D:\workspace\microblog\node_modules\bluebird\js\release\nodeify.js:23:30)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:566:21)
+    at Promise._settlePromise0 (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:693:18)
+    at Promise._fulfill (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:638:18)
+    at Promise._resolveCallback (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:432:57)
+    at Promise._settlePromiseFromHandler (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:524:17)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:569:18)
+[Thu Nov 30 2017 11:52:34 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 14:02:27 GMT+0800 (中国标准时间)] /
+MongoError: server instance in invalid state connected
+    at Function.MongoError.create (D:\workspace\microblog\node_modules\mongodb-core\lib\error.js:29:11)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb-core\lib\topologies\server.js:369:22)
+    at Server.connect (D:\workspace\microblog\node_modules\mongodb\lib\server.js:368:17)
+    at open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:228:19)
+    at Db.open (D:\workspace\microblog\node_modules\mongodb\lib\db.js:251:44)
+    at D:\workspace\microblog\service\baseService.js:507:21
+    at nextTask (D:\workspace\microblog\node_modules\async\dist\async.js:5297:14)
+    at Object.waterfall (D:\workspace\microblog\node_modules\async\dist\async.js:5307:5)
+    at Function.baseService.findArrayLimit (D:\workspace\microblog\service\baseService.js:505:11)
+    at index (D:\workspace\microblog\controller\indexCol.js:14:21)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+[Thu Nov 30 2017 14:29:51 GMT+0800 (中国标准时间)] /
+TypeError: assert.isEqual is not a function
+    at index (D:\workspace\microblog\controller\indexCol.js:16:16)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\index.js:275:10)
+    at D:\workspace\microblog\node_modules\express-session\index.js:489:7
+    at tryCatcher (D:\workspace\microblog\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise.successAdapter [as _fulfillmentHandler0] (D:\workspace\microblog\node_modules\bluebird\js\release\nodeify.js:23:30)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:566:21)
+    at Promise._settlePromise0 (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:693:18)
+    at Promise._fulfill (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:638:18)
+    at Promise._resolveCallback (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:432:57)
+[Thu Nov 30 2017 14:39:25 GMT+0800 (中国标准时间)] /
+AssertionError [ERR_ASSERTION]: 不相等
+    at index (D:\workspace\microblog\controller\indexCol.js:16:16)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\index.js:275:10)
+    at D:\workspace\microblog\node_modules\express-session\index.js:489:7
+    at tryCatcher (D:\workspace\microblog\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise.successAdapter [as _fulfillmentHandler0] (D:\workspace\microblog\node_modules\bluebird\js\release\nodeify.js:23:30)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:566:21)
+    at Promise._settlePromise0 (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:693:18)
+    at Promise._fulfill (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:638:18)
+    at Promise._resolveCallback (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:432:57)
+[Thu Nov 30 2017 14:48:55 GMT+0800 (中国标准时间)] /
+AssertionError [ERR_ASSERTION]: 不相等
+    at index (D:\workspace\microblog\controller\indexCol.js:16:16)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\index.js:275:10)
+    at D:\workspace\microblog\node_modules\express-session\index.js:489:7
+    at tryCatcher (D:\workspace\microblog\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise.successAdapter [as _fulfillmentHandler0] (D:\workspace\microblog\node_modules\bluebird\js\release\nodeify.js:23:30)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:566:21)
+    at Promise._settlePromise0 (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:693:18)
+    at Promise._fulfill (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:638:18)
+    at Promise._resolveCallback (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:432:57)
+[Thu Nov 30 2017 14:49:19 GMT+0800 (中国标准时间)] /
+AssertionError [ERR_ASSERTION]: 不相等
+    at index (D:\workspace\microblog\controller\indexCol.js:16:16)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\index.js:275:10)
+    at D:\workspace\microblog\node_modules\express-session\index.js:489:7
+    at tryCatcher (D:\workspace\microblog\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise.successAdapter [as _fulfillmentHandler0] (D:\workspace\microblog\node_modules\bluebird\js\release\nodeify.js:23:30)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:566:21)
+    at Promise._settlePromise0 (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:693:18)
+    at Promise._fulfill (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:638:18)
+    at Promise._resolveCallback (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:432:57)
+[Thu Nov 30 2017 14:49:32 GMT+0800 (中国标准时间)] /
+AssertionError [ERR_ASSERTION]: 不相等
+    at index (D:\workspace\microblog\controller\indexCol.js:17:30)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\workspace\microblog\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\workspace\microblog\node_modules\express\lib\router\layer.js:95:5)
+    at D:\workspace\microblog\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (D:\workspace\microblog\node_modules\express\lib\router\index.js:335:12)
+    at next (D:\workspace\microblog\node_modules\express\lib\router\index.js:275:10)
+    at D:\workspace\microblog\node_modules\express-session\index.js:489:7
+    at tryCatcher (D:\workspace\microblog\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise.successAdapter [as _fulfillmentHandler0] (D:\workspace\microblog\node_modules\bluebird\js\release\nodeify.js:23:30)
+    at Promise._settlePromise (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:566:21)
+    at Promise._settlePromise0 (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:614:10)
+    at Promise._settlePromises (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:693:18)
+    at Promise._fulfill (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:638:18)
+    at Promise._resolveCallback (D:\workspace\microblog\node_modules\bluebird\js\release\promise.js:432:57)
