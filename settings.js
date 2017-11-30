@@ -5,7 +5,7 @@
 module.exports = {
 		cookieSecret:"myblog",
 		db:"microblog",
-		host:"192.168.3.115",
+		host:"127.0.0.1",
 		port: 27017,
-		url: "mongodb://192.168.3.115:27017/microblog"
+		url: "mongodb://127.0.0.1:27017/microblog"
 };
