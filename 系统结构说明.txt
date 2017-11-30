@@ -1,0 +1,26 @@
+网站根目录
+    |
+     ----bin--启动目录
+    |
+     ----common--公共类常量配置目录
+    |
+     ----controller--控制层目录
+    |
+     ----models--模型目录
+    |
+     ----node_modules--依赖包目录
+    |
+     ----public--静态文件目录
+    |
+     ----routes--路由转换器目录
+    |
+     ----service--数据服务层目录
+    |
+     ----utils--工具类目录
+    |
+     ----views--页面目录
+    |
+     -----logs--日志目录
+
+  
+models-->views-->controller
