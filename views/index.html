@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+    a{text-decoration: none;display: inline-block;margin-right:15px;color:#666;font-size:14px;text-align:center;border:1px solid #e5e5e5;height:35px;width:100px;line-height:35px;border-radius:3px;}
+    a.login{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.reg:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.upload:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+	.but-edit{display: inline-block;  height:30px;width:60px;border:1px solid #00B7FF;border-radius: 3px;line-height:30px;text-align: center;cursor: pointer;background: #19a4e1;color:#fff;}
+	</style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+	<p>总注册人数： <%= count %></p>
+    <% if(user){ %>
+    	<p>Welcome to <%= user.userName %></p>
+    <%}%>
+    <div>
+    	<% if(user){ %>
+	    	<a class="login" href="/push.html">发表</a>
+	    	<a class="reg" href="/logout">退出</a>
+    	<%} else {%>
+	    	<a class="login" href="/login.html">登录</a>
+	    	<a class="reg" href="/reg.html">注册</a>
+    	<%}%>
+		<a class="upload" href="/upload.html">上传头像</a>
+    	
+    	
+    </div>
+    <% if(success){ %>
+    	<div style="color:red;margin-top:30px;"><%=success%></div>
+    <%}%>
+    <% articles.forEach(function (article, index) { %>
+	  <p><h2><span><%= article.title %></span></h2></p>
+	  <p class="info">
+	    作者：<span><%= article.userName %></span> | 
+	    日期：<%= article.time.minute %>
+	  </p>
+	  <p><%- article.content %></p>
+	  <span class="but-edit" onclick="editArticle('<%= article._id %>')">修改</span>
+	  <span class="but-edit" onclick="delArticle('<%= article._id %>')">删除</span>
+	<% }) %>
+  </body>
+</html>
+<script>
+	function editArticle(id){
+	    window.open("/edit/article.html?objId="+id);
+	}
+	function delArticle(id){
+	    window.location.href = "/del/article.html?objId="+id;
+	}
+</script>
