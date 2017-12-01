@@ -27,4 +27,9 @@ node ./bin/www
 1、安装NodeJs
 到官网https://nodejs.org/en/download
 下载最新版本
+查看是否安装成功
+```
+node -v
+```
+2、
 
