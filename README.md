@@ -66,7 +66,7 @@ npm start
 
 刚刚已经创建了一个最基础化的express项目了，接下来就开始着手开发了，首先进入到项目所在目录查看整个项目结构。
 
-<img src="https://github.com/houfengtai/microblog/tree/master/demoImg/prolist.png" />
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/prolist.png" />
 
 ##### 开发前准备
 
@@ -243,11 +243,11 @@ pkill mongod
 打开我们的IDEA工具（需要了解更多的IDEA工具使用方法请自行百度）<br />
 点击左上角File-->Open… -->选择刚才创建的microblog项目
 
-<img src="https://github.com/houfengtai/microblog/tree/master/demoImg/open.png" />
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/open.png" />
 
 看一下我们刚才创建的项目总体结构<br />
 
-<img src="https://github.com/houfengtai/microblog/tree/master/demoImg/prolist1.png" />
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/prolist1.png" />
 
 app.js：启动文件，或者说入口文件 <br />
 package.json：存储着工程的信息及模块依赖<br />
