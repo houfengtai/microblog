@@ -92,7 +92,7 @@ IDEA是需要钱的，这个对于我们来说是没有一点技术含量的，�
 2、数据库<br />
 数据库有：<br />
 	关系型数据库：Oracle、DB2、SQL server、Mysql等等<br />
-	非关系型数据库有：MongoDB、HBase、Redis等等<br />
+	非关系型数据库：MongoDB、HBase、Redis等等<br />
 
 本文使用MongoDB,mongo是面向文档的数据库，存储数据格式为BSON,与NodeJs操作的JSON最为衔接，效率也是最快的。
 
