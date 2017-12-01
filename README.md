@@ -65,7 +65,6 @@ npm start
 #### 开始开发
 
 刚刚已经创建了一个最基础化的express项目了，接下来就开始着手开发了，首先进入到项目所在目录查看整个项目结构。
-![Image text](microblog/demoImg/prolist.png)
 
 <img src="https://github.com/houfengtai/microblog/tree/master/demoImg/prolist.png" />
 
