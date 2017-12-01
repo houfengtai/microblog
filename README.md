@@ -316,6 +316,6 @@ var app = express()
 生成一个express实例 app。<br/>
 
 ```javascript
-app.set('views', path.join(dirname, 'views’))
+app.set('views', path.join(__dirname, 'views'))
 ```
 设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,dirname 为全局变量,存储当前正在执行的脚本所在的目录
