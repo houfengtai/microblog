@@ -34,5 +34,6 @@ node -v
 出现版本号即表示安装成功，最新版本是不需要配置环境变量的，安装时会自动配置好的
 <img src="https://github.com/houfengtai/microblog/tree/master/demoImg/node-v.png" width="405px" height="123px" />
 
-2、
+2、安装Express（这是目前nodeJs唯一官方认证框架，类似于Struts、spring等）
+
 
