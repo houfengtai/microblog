@@ -31,6 +31,6 @@ node ./bin/www
 ```
 node -v
 ```
-<img src="https://github.com/houfengtai/microblog/tree/master/demoImg/node-v.png" />
+<img src="https://github.com/houfengtai/microblog/tree/master/demoImg/node-v.png" width="405px" height="123px" />
 2、
 
