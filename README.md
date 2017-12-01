@@ -22,7 +22,7 @@ node ./bin/www
 ##### 另外
 本项目非使用到前端框架，后期会把该项目写成纯API框架形式，前端会使用VUE2.x或angularjs等编写前端项目用来前后台对接，以达到前后端分离效果。
 
-### 学前准备（安装环境）
+### 学前准备（安装环境）本教程所使用系统为win10
 
 1、安装NodeJs
 到官网https://nodejs.org/en/download
@@ -40,5 +40,6 @@ npm install -g express-generator
 npm install -g express
 express -V
 ```
-note:其中 -g 代表全局安装，这样的话以后可以在任意目录下使用express命令创建项目 -V是大写的，用来查看当前安装的版本号
+__note:__
+其中 -g 代表全局安装，这样的话以后可以在任意目录下使用express命令创建项目 -V是大写的，用来查看当前安装的版本号
 
