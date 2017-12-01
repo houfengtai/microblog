@@ -31,5 +31,6 @@ node ./bin/www
 ```
 node -v
 ```
+<img src="" />
 2、
 
