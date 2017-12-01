@@ -21,3 +21,8 @@ node ./bin/www
 ```
 ##### 另外
 本项目非使用到前端框架，后期会把该项目写成纯API框架形式，前端会使用VUE2.x或angularjs等编写前端项目用来前后台对接，以达到前后端分离效果。
+
+### 学前准备（安装环境）
+
+安装NodeJs
+到官网(https://nodejs.org/en/download/)下载最新版本
