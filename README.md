@@ -25,7 +25,7 @@ node ./bin/www
 
 ### 学前准备（安装环境）本教程所使用系统为win10
 
-1、安装NodeJs
+1、安装NodeJs<br />
 到官网https://nodejs.org/en/download
 下载最新版本，已安装的不是最新版的请按自己系统自行百度教程升级最新版本<br/>
 查看是否安装成功：打开控制台输入
