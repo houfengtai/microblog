@@ -1,5 +1,5 @@
 # NodeJs+Express+MongoDb最新教程
-## NodeJs 零基础快速搭建一个microblog（入门级别）
+## NodeJs 零基础快速搭建一个microblog（入门到精通）
 
 ### 前言
 初学NodeJs时曾在网上看过不少NodeJs的书籍以及项目实战，无奈NodeJs更新太快变化太大了，网上很多书籍以及项目教程所涉及的代码已不适用，要么就是结构混乱，让初学者苦不堪言（ps：自己动手过，遇到了坑，才会让自己成长）；本文旨在让初学者有个大概了解，能够快速入门上手，从零开始到搭建项目架构（MVC模式）和数据库，并测试通过CRUD等数据库操作。
@@ -34,6 +34,11 @@ node -v
 出现版本号即表示安装成功，最新版本是不需要配置环境变量的，安装时会自动配置好的
 <img src="https://github.com/houfengtai/microblog/tree/master/demoImg/nodev.jpg" width="405px" height="123px" />
 
-2、安装Express（这是目前nodeJs唯一官方认证框架，类似于Struts、spring等）
-
+2、安装Express（这是目前nodeJs唯一官方认证框架，类似于Struts、spring等，通常用于web后端开发）
+```
+npm install -g express-generator
+npm install -g express
+express -V
+```
+note:其中 -g 代表全局安装，这样的话以后可以在任意目录下使用express命令创建项目 -V是大写的，用来查看当前安装的版本号
 
