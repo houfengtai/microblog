@@ -32,8 +32,9 @@ node ./bin/www
 node -v
 ```
 出现版本号即表示安装成功，最新版本是不需要配置环境变量的，安装时会自动配置好的
+### 
 <img src="https://github.com/houfengtai/microblog/tree/master/demoImg/nodev.jpg" width="405px" height="123px" />
-
+### 
 2、安装Express（这是目前nodeJs唯一官方认证框架，类似于Struts、spring等，通常用于web后端开发）
 ```
 npm install -g express-generator
@@ -42,7 +43,7 @@ express -V
 ```
 __note:__
 其中 -g 代表全局安装，这样的话以后可以在任意目录下使用express命令创建项目 -V是大写的，用来查看当前安装的版本号<br />
-3、创建项目（体验效果）
+3、创建项目（体验效果）<br />
 1）去到指定目录下
 ```
 cd d:\\workspace
@@ -62,3 +63,5 @@ npm start
 ```
 5）浏览器查看项目效果：http://127.0.0.1:3000
 然后你会看到:express的欢迎信息
+__然后开始我们的express之旅吧__
+### 开发
