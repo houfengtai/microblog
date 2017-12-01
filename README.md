@@ -308,3 +308,14 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 ```
+这里我们通过require()加载了express、path 等模块,以及 routes 文件夹下的index. js和 users.js 路由文件。 下面来讲解每行代码的含义。<br />
+
+```javascript
+var app = express()
+```
+生成一个express实例 app。<br/>
+
+```javascript
+app.set('views', path.join(dirname, 'views’))
+```
+设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,dirname 为全局变量,存储当前正在执行的脚本所在的目录
