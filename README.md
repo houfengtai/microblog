@@ -24,6 +24,7 @@ node ./bin/www
 
 ### 学前准备（安装环境）
 
-安装NodeJs
+1、安装NodeJs
 到官网https://nodejs.org/en/download
 下载最新版本
+
