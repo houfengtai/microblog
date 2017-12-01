@@ -259,7 +259,7 @@ views：存放视图文件或者说模版文件<br />
 bin：存放可执行文件<br />
 <br />
 打开app.js,让我们看看里面究竟有什么:
-```
+```javascript
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
