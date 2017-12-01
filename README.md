@@ -237,4 +237,23 @@ __拓展:__
 cd
 pkill mongod
 ```
+##### 正式开发
+经过上面的努力，所有的环境都已安装就绪，下面我们就开始来正式写代码了，想想都有点小激动吧！
 
+打开我们的IDEA工具（需要了解更多的IDEA工具使用方法请自行百度）<br />
+点击左上角File-->Open… -->选择刚才创建的microblog项目
+
+<img src="https://github.com/houfengtai/microblog/tree/master/demoImg/open.png" />
+
+看一下我们刚才创建的项目总体结构<br />
+
+<img src="https://github.com/houfengtai/microblog/tree/master/demoImg/prolist1.png" />
+
+app.js：启动文件，或者说入口文件 <br />
+package.json：存储着工程的信息及模块依赖<br />
+当在 dependencies 中添加依赖的模块时，运行 npm install，npm 会检查当前目录下的 package.json，并自动安装所有指定的模块 node_modules：存放 package.json 中安装的模块，
+当你在 package.json 添加依赖的模块并安装后，存放在这个文件夹下<br />
+public：存放 image、css、js 等文件 <br />
+routes：存放路由文件 <br />
+views：存放视图文件或者说模版文件<br />
+bin：存放可执行文件<br />
