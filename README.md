@@ -573,10 +573,8 @@ app.set('view engine', 'html');
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/nupdate.png" />
 
 或者打开控制台输入"npm install" 或者输入"npm update" 回车，如图:
-
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/n.png" />
 
-就可以使用html样板了。
 把./views/目录下所有jade文件改成html文件<br />
 把index.html 内容改成
 ```html
@@ -593,6 +591,10 @@ app.set('view engine', 'html');
 </body>
 </html>
 ```
+IDEA重启一下项目，浏览器访问 http://127.0.0.1/:3000 效果如下：
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/welcom.png" />
+
+发现可以使用html样板了。
 
 
 #### 路由控制（核心）
