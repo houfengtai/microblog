@@ -760,7 +760,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 ```
 __注意：__
-我们通过 express -e mricloblog 只是初始化了一个使用 jade 模板引擎的工程而已，比如 node_modules 下添加了 jade 模块，
+我们通过 express -e mricroblog 只是初始化了一个使用 jade 模板引擎的工程而已，比如 node_modules 下添加了 jade 模块，
 views 文件夹下有 index.jade 。并不是说强制该工程只能使用 jade 不能使用其他的模板引擎比如 ejs，真正指定使用哪个模板引擎的是 app.set('view engine', 'jade'); 
 刚才我们就已经改成我们比较熟悉的html了。
 <br />
