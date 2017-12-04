@@ -784,3 +784,61 @@ views 文件夹下有 index.jade 。并不是说强制该工程只能使用 jade
 </html>
 ```
 
+当我们 res.render('index', { title: 'Express' }); 时，模板引擎会把 <%= title %> 替换成 Express，然后把替换后的页面显示给用户。<br />
+
+渲染后生成的页面代码:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Express</title>
+  <link rel='stylesheet', href='/stylesheets/style.css'>
+</head>
+<body>
+  <h1>Express</h1>
+  <p>Welcome to Express</p>
+</body>
+</html>
+```
+__注意：__
+我们通过 app.use(express.static(path.join(__dirname, 'public'))) 设置了静态文件目录为 public 文件夹，
+所以上面代码中的 href='/stylesheets/style.css' 就相当于 href='public/stylesheets/style.css' 。<br />
+
+我们刚才改了模板引擎为html，实质上是使用ejs的标签系统，要是学过jsp的估计对这个就非常熟悉了，它只有以下3个标签：<br />
+* <% code %>：JavaScript 代码。
+* <%= code %>：显示替换过 HTML 特殊字符的内容。
+* <%- code %>：显示原始 HTML 内容。
+__注意：__
+<%= code %> 和 <%- code %> 的区别，当变量 code 为普通字符串时，两者没有区别。当 code 比如为
+### hello
+这种字符串时，<%= code %> 会原样输出
+### hello
+而 <%- code %> 则会显示 H1 大的 hello 字符串。<br />
+
+我们可以在 <% %> 内使用 JavaScript 代码。下面是 ejs 的官方示例：<br />
+The Data
+```javascript
+supplies: ['mop', 'broom', 'duster']
+```
+The Template
+
+```html
+<ul>
+<% for(var i=0; i<supplies.length; i++) {%>
+   <li><%= supplies[i] %></li>
+<% } %>
+</ul>
+```
+
+The Result
+```html
+<ul>
+  <li>mop</li>
+  <li>broom</li>
+  <li>duster</li>
+</ul>
+```
+
+
+
