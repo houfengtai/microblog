@@ -745,4 +745,42 @@ app.get('/huafeng', function (req, res) {
 
 >模板引擎的功能是将页面模板和要显示的数据结合起来生成 HTML 页面。它既可以运 行在服务器端又可以运行在客户端，大多数时候它都在服务器端直接被解析为 HTML，解析完成后再传输给客户端，因此客户端甚至无法判断页面是否是模板引擎生成的。有时候模板引擎也可以运行在客户端，即浏览器中，典型的代表就是 XSLT，它以 XML 为输入，在客户端生成 HTML 页面。但是由于浏览器兼容性问题，XSLT 并不是很流行。目前的主流还是由服务器运行模板引擎。 在 MVC 架构中，模板引擎包含在服务器端。控制器得到用户请求后，从模型获取数据，调用模板引擎。模板引擎以数据和页面模板为输入，生成 HTML 页面，然后返回给控制器，由控制器交回客户端。 ——《Node.js开发指南》
 
+什么是 jade ?<br />
+
+jade 是模板引擎的一种，也是我们这个教程中使用的模板引擎，因为它使用起来十分简单，而且与 express 集成良好。<br />
+
+详情见：[jade文档](http://jade-lang.com/)
+
+##### 使用模板引擎
+
+前面我们通过以下两行代码设置了模板文件的存储位置和使用的模板引擎：
+
+```javascript
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+```
+__注意：__
+我们通过 express -e mricloblog 只是初始化了一个使用 jade 模板引擎的工程而已，比如 node_modules 下添加了 jade 模块，
+views 文件夹下有 index.jade 。并不是说强制该工程只能使用 jade 不能使用其他的模板引擎比如 ejs，真正指定使用哪个模板引擎的是 app.set('view engine', 'jade'); 
+刚才我们就已经改成我们比较熟悉的html了。
+<br />
+
+在 /routes/index.js 中通过调用 res.render() 渲染模版，并将其产生的页面直接返回给客户端。它接受两个参数，
+第一个是模板的名称，即 views 目录下的模板文件名，扩展名 .jade（注：刚才已改成html）可选。第二个参数是传递给模板的数据对象，用于模板翻译。<br />
+
+打开 views/index.ejs ，内容如下:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel='stylesheet', href='/stylesheets/style.css'>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %></p>
+</body>
+</html>
+```
 
