@@ -239,6 +239,7 @@ __拓展:__
 cd
 pkill mongod
 ```
+3、当然还有在本机安装（不建议）：按不同系统自行百度吧！<br />
 ##### 正式开发
 经过上面的努力，所有的环境都已安装就绪，下面我们就开始来正式写代码了，想想都有点小激动吧！<br />
 NodeJs API:https://nodejs.org/dist/latest-v8.x/docs/api/
