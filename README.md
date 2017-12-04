@@ -556,11 +556,44 @@ app.set('view engine', 'jade');
 替换成
 ```javascript
 app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'jade');
-app.engine('html', require('jade').__express);//把jade修改成html模块
+//app.set('view engine', 'ejs');
+app.engine('html', require('ejs').__express);//把ejs修改成html模块
 app.set('view engine', 'html');
 ```
-我们保存一下就可以使用html样板了。
+打开package.json文件，找到以下行：
+```javascript
+"jade": "^1.11.0",
+```
+替换成
+```javascript
+"ejs": "~2.5.6",
+```
+我们保存一下,然后选中package.json文件右键选择 run 'npm update'如图:
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/nupdate.png" />
+
+或者打开控制台输入"npm install" 或者输入"npm update" 回车，如图:
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/n.png" />
+
+就可以使用html样板了。
+把./views/目录下所有jade文件改成html文件<br />
+把index.html 内容改成
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel='stylesheet', href='/stylesheets/style.css'>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %></p>
+</body>
+</html>
+```
+
 
 #### 路由控制（核心）
 上面我们学习了如何创建和启动一个项目，并且对整个项目结构进行了讲解和运行流程，接下来开始讲解Express框架的基本使用与路由控制。<br />
@@ -569,4 +602,11 @@ Express文档:http://www.nodeclass.com/api/express4.html
 Express 文档（中文）:http://www.expressjs.com.cn/4x/api.html
 <br />
 ##### 工作原理
+在./routes/index.js文件中有以下代码：
+```javascript
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+```
+这段代码的意思是当访问主页时，调用jade模板引擎，来渲染/views/index.jade模板文件（即将 title 变量全部替换为字符串 Express），生成静态页面并显示在浏览器中。
 
