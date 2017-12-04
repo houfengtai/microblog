@@ -62,6 +62,7 @@ npm start
 ```
 5）浏览器查看项目效果：http://127.0.0.1:3000
 然后你会看到:express的欢迎信息。然后开始我们的express之旅吧！
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/welcom.png" />
 
 #### 开始开发
 
