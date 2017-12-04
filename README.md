@@ -9,7 +9,7 @@ __注：此项目为入门级别，大神可以飘过，有不足之处请多多
 <br /><br />参考于[使用 Express + MongoDB 搭建多人博客](http://wiki.jikexueyuan.com/project/express-mongodb-setup-blog)
 <br />
 #### 技术栈
-NodeJs8.9.1 + Express4.15.5 + MongoDB3.2
+NodeJs8.9.1 + Express4.15.5 + MongoDB3.4
 
 #### 项目运行
 ##### 注意：由于使用到数据库，请先预装好MongoDB,以及Node环境,项目链接数据库配置文件为setting.js,修改为安装数据库时的电脑IP
@@ -104,15 +104,15 @@ IDEA是需要钱的，这个对于我们来说是没有一点技术含量的，�
 docker search mongo
 ```
 
-拉取官方镜像（本文使用mongo3.2版本）
+拉取官方镜像（本文使用mongo3.4版本）
 
 ```
-docker pull mongo:3.2
+docker pull mongo:3.4
 ```
 	
 使用mongo镜像
 ```
-docker run -p 27017:27017 -e $PWD/db:/data/db -d mongo:3.2
+docker run -p 27017:27017 -e $PWD/db:/data/db -d mongo:3.4
 ```
 
 命令说明：<br />
