@@ -514,3 +514,50 @@ server.on('error', onError);
 server.on('listening', onListening);
 ```
 在所有网络接口上监听所提供的端口<br />
+
+再看一下./routes/index.js文件：<br />
+```javascript
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+module.exports = router;
+```
+
+生成一个路由实例用来捕获访问主页的GET请求，导出这个路由并在app.js中通过
+app.use('/', routes); 加载。
+这样，当访问主页时，就会调用res.render('index', { title: 'Express' });渲染views/index.ejs模版并显示到浏览器中。<br />
+
+再看一下./views/index.jade文件:<br />
+
+```javascript
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+```
+可以看出该模板继承了layout模板，在渲染模板时我们传入了一个变量 title 值为 express 字符串，模板引擎会将所有 {title} 替换为 express ，然后将渲染后生成的html显示到浏览器中。<br />
+
+jade文档:http://jade-lang.com/
+
+这个不习惯使用jade的话是可以改成html传统模式的，具体方法如下：<br />
+打开app.js这个文件，找到以下行：
+
+```javascript
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+```
+替换成
+```javascript
+app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'jade');
+app.engine('html', require('jade').__express);//把jade修改成html模块
+app.set('view engine', 'html');
+```
+我们保存一下就可以使用html样板了。
