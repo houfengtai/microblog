@@ -610,5 +610,42 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 ```
-这段代码的意思是当访问主页时，调用jade模板引擎，来渲染/views/index.jade模板文件（即将 title 变量全部替换为字符串 Express），生成静态页面并显示在浏览器中。
+这段代码的意思是当访问主页时，调用jade模板引擎，来渲染/views/index.jade模板文件（即将 title 变量全部替换为字符串 Express），生成静态页面并显示在浏览器中。<br />
+可以看出请求访问浏览器地址到返回数据整个运行流程是：<br />
+```
+  HTTP-->app.js-->routes-->response
+ ```
+也就说每一个访问都需要创建一个routes，这样，随着时间的推移，app.js文件不断地require，不断地app.use，主入口文件app.js就会变得非常臃肿难以维护了，也不符合代码模块化的思想。
+作为一个有梦想的程序员，需要向着架构师方向前进。代码不仅要写的好，层次要分明，复用率要高。<br />
+所以我们要对代码进行改进，Express官方给出的写法是在 app.js 中实现了简单的路由分配，然后再去 index.js 中找到对应的路由函数，最终实现路由功能。我们要把所有请求的routes配置到/routes/index.js文件上，
+这样只需要维护一个文件即可，app.js文件只有一个总路由。
+打开app.js文件，把
+```javascript
+var index = require('./routes/index');
+var users = require('./routes/users');
+```
+改成：
 
+```javascript
+var routes = require('./routes/index');
+```
+把
+```javascript
+app.use('/', index);
+app.use('/users', users);
+```
+改成：
+```javascript
+routes(app);
+```
+
+修改/routes/index.js文件内容改为如下：
+```javascript
+module.exports = function(app) {
+
+  app.get('/', function (req, res) {
+    res.render('index', { title: 'Express' });
+  });
+
+};
+```
