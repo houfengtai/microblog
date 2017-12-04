@@ -809,6 +809,7 @@ __注意：__
 * <% code %>：JavaScript 代码。
 * <%= code %>：显示替换过 HTML 特殊字符的内容。
 * <%- code %>：显示原始 HTML 内容。
+<br />
 __注意：__
 <%= code %> 和 <%- code %> 的区别，当变量 code 为普通字符串时，两者没有区别。当 code 比如为
 ### hello
