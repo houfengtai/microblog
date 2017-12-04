@@ -713,5 +713,36 @@ req.param('name')
 * req.query： 处理 get 请求，获取 get 请求参数
 * req.params： 处理 /:xxx 形式的 get 或 post 请求，获取请求参数
 * req.body： 处理 post 请求，获取 post 请求体
-* req.param()： 处理 get 和 post 请求，但查找优先级由高到低为 req.params→req.body→req.query
-路由规则还支持正则表达式，更多请查看Express官方文档: http://www.nodeclass.com/api/express4.html
+* req.param()： 处理 get 和 post 请求，但查找优先级由高到低为 req.params→req.body→req.query<br />
+路由规则还支持正则表达式，更多请查看Express官方文档: http://www.nodeclass.com/api/express4.html<br />
+
+##### 添加路由规则
+当我们访问不存在的请求时,会显示如下:
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/e.png" />
+
+这是因为不存在 /huafeng 的路由规则，而且它也不是一个 public 目录下的文件，所以 express 返回了 404 Not Found 的错误。下面我们来添加这条路由规则，使得当访问 localhost:3000/huafeng 时，页面显示 hello,world!<br />
+
+注意：以下修改仅用于测试，看到效果后再把代码还原回来。<br />
+
+修改 /routes/index.js，在 app.get('/') 函数后添加一条路由规则：<br />
+```javascript
+app.get('/huafeng', function (req, res) {
+        res.send("hello world!");
+    });
+```
+重启项目之后，刷新浏览器如下:<br />
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/welcom1.png" />
+
+创建路由就是如此简单！
+
+#### 模版引擎
+
+接下来开始学习模板引擎。
+
+##### 什么是模板引擎
+模板引擎（Template Engine）是一个将页面模板和要显示的数据结合起来生成 HTML 页面的工具。 如果说上面讲到的 express 中的路由控制方法相当于 MVC 中的控制器的话，那模板引擎就相当于 MVC 中的视图。
+
+>模板引擎的功能是将页面模板和要显示的数据结合起来生成 HTML 页面。它既可以运 行在服务器端又可以运行在客户端，大多数时候它都在服务器端直接被解析为 HTML，解析完成后再传输给客户端，因此客户端甚至无法判断页面是否是模板引擎生成的。有时候模板引擎也可以运行在客户端，即浏览器中，典型的代表就是 XSLT，它以 XML 为输入，在客户端生成 HTML 页面。但是由于浏览器兼容性问题，XSLT 并不是很流行。目前的主流还是由服务器运行模板引擎。 在 MVC 架构中，模板引擎包含在服务器端。控制器得到用户请求后，从模型获取数据，调用模板引擎。模板引擎以数据和页面模板为输入，生成 HTML 页面，然后返回给控制器，由控制器交回客户端。 ——《Node.js开发指南》
+
+
