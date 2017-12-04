@@ -240,8 +240,15 @@ cd
 pkill mongod
 ```
 ##### 正式开发
-经过上面的努力，所有的环境都已安装就绪，下面我们就开始来正式写代码了，想想都有点小激动吧！
-
+经过上面的努力，所有的环境都已安装就绪，下面我们就开始来正式写代码了，想想都有点小激动吧！<br />
+NodeJs API:https://nodejs.org/dist/latest-v8.x/docs/api/
+<br />
+NodeJs API（中文）:http://nodejs.cn/api/
+<br />
+Express API:http://www.nodeclass.com/api/express4.html
+<br />
+Express API（中文）:http://www.expressjs.com.cn/4x/api.html
+<br />
 打开我们的IDEA工具（需要了解更多的IDEA工具使用方法请自行百度）<br />
 点击左上角File-->Open… -->选择刚才创建的microblog项目
 
