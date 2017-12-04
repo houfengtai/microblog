@@ -649,3 +649,69 @@ module.exports = function(app) {
 
 };
 ```
+再次运行项目，你会发现主页没有发生任何改变，说明我们的修改是可行的没有影响的。
+
+##### 路由规则
+Express封装了多种http请求，我们主要用的是get和post以及all（以后跨域请求会用到），即app.get()和paa.post()以及app.all()。<br />
+pp.get() 和 app.post() 的第一个参数都为请求的路径，第二个参数为处理请求的回调函数，回调函数有两个参数分别是 req 和 res，代表请求信息和响应信息 。路径请求及对应的获取路径有以下几种形式：<br />
+<br />
+req.query
+```
+// GET /find?f=one+two  
+req.query.f  
+// => "one two"  
+
+// GET /find?name=huafeng&sex=001&article[state]=001
+req.query.name  
+// => "huafeng"  
+
+req.query.article.state  
+// => "001"  
+
+```
+
+req.body
+```
+// POST user[name]=huafeng&user[email]=848989747@qq.com  
+req.body.user.name  
+// => "tobi"  
+
+req.body.user.email  
+// => "848989747@qq.com"  
+
+// POST { "name": "huafeng" }  
+req.body.name  
+// => "huafeng"
+```
+
+req.params
+```
+// GET /user/huafeng
+req.params.name  
+// => "huafeng"  
+
+// GET /js/javascripts/article.js  
+req.params[0]  
+// => "javascripts/article.js"
+```
+req.param(name)
+
+```
+// ?name=huafeng  
+req.param('name')  
+// => "huafeng"  
+
+// POST name=huafeng  
+req.param('name')  
+// => "huafeng"  
+
+// /user/huafeng for /user/:name   
+req.param('name')  
+// => "huafeng" 
+```
+可以看出:<br />
+* req.query： 处理 get 请求，获取 get 请求参数
+* req.params： 处理 /:xxx 形式的 get 或 post 请求，获取请求参数
+* req.body： 处理 post 请求，获取 post 请求体
+* req.param()： 处理 get 和 post 请求，但查找优先级由高到低为 req.params→req.body→req.query
+路由规则还支持正则表达式，更多请查看Express官方文档:http://www.nodeclass.com/api/express4.html
