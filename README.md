@@ -488,3 +488,29 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 ```
+根据Express版本的迭代更新，很多由express集成的模块功能又独立出去了。旧版本的创建服务器功能已移植到http模块上了。
+```javascript
+#!/usr/bin/env node
+```
+表明是node可执行文件
+```javascript
+var app = require('../app');
+var debug = require('debug')('microblog:server');
+var http = require('http');
+```
+引入模块依赖
+```javascript
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+```
+设置端口号
+```javascript
+var server = http.createServer(app);
+```
+创建HTTP服务器
+```javascript
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+```
+在所有网络接口上监听所提供的端口<br />
