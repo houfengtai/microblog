@@ -714,4 +714,4 @@ req.param('name')
 * req.params： 处理 /:xxx 形式的 get 或 post 请求，获取请求参数
 * req.body： 处理 post 请求，获取 post 请求体
 * req.param()： 处理 get 和 post 请求，但查找优先级由高到低为 req.params→req.body→req.query
-路由规则还支持正则表达式，更多请查看Express官方文档:http://www.nodeclass.com/api/express4.html
+路由规则还支持正则表达式，更多请查看Express官方文档: http://www.nodeclass.com/api/express4.html
