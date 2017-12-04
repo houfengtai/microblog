@@ -561,3 +561,12 @@ app.engine('html', require('jade').__express);//把jade修改成html模块
 app.set('view engine', 'html');
 ```
 我们保存一下就可以使用html样板了。
+
+#### 路由控制（核心）
+上面我们学习了如何创建和启动一个项目，并且对整个项目结构进行了讲解和运行流程，接下来开始讲解Express框架的基本使用与路由控制。<br />
+Express文档:http://www.nodeclass.com/api/express4.html
+<br />
+Express 文档（中文）:http://www.expressjs.com.cn/4x/api.html
+<br />
+##### 工作原理
+
