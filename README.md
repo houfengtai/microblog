@@ -888,5 +888,46 @@ html学习手册：http://www.w3school.com.cn/
 
 ```
 
+对于/login.html与/reg.html只能是未登录的用户访问，而/push.html与/loginout只能是已登录的用户访问，
+根据登录用户与未登录用户主页会展示不同的内容。<br /><br />
+
+修改/routes/index.js文件，如下：
+```javascript
+module.exports = function(app) {
+    /**
+     * 主页
+     */
+    app.get('/', function (req, res) {
+        res.render('index', { title: '主页' });
+    });
+
+    /**
+     * 登录跳转页面
+     */
+    app.get('/login.html', function (req, res) {
+        res.render('login', { title: '登录' });
+    });
+
+    /**
+     * 注册跳转页面
+     */
+    app.get('/reg.html', function (req, res) {
+        res.render('register', { title: '注册' });
+    });
+    /**
+     * 文章发表跳转页面
+     */
+    app.get('/push.html', function (req, res) {
+        res.render('push_article', { title: '发表' });
+    });
+
+    /**
+     * 退出登录方法
+     */
+    app.get('//loginout', function (req, res) {
+        res.redirect('/');//发表成功跳转到主页
+    });
+};
+```
 
 
