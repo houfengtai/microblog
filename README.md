@@ -95,7 +95,7 @@ IDEA是需要钱的，这个对于我们来说是没有一点技术含量的，�
 	关系型数据库：Oracle、DB2、SQL server、Mysql等等<br />
 	非关系型数据库：MongoDB、HBase、Redis等等<br />
 
-本文使用MongoDB,mongo是面向文档的数据库，存储数据格式为BSON,与NodeJs操作的JSON最为衔接，效率也是最快的。
+本文使用MongoDB,mongo是面向文档的数据库，存储数据格式为BJSON,与NodeJs操作的JSON最为衔接，效率也是最快的。
 
 安装方法（有多种环境安装，自行选择一个吧）：<br />
 1、Docker上安装（docker是什么？这个不详说了，适用于高级人群，不适合初学者）:<br />
@@ -929,5 +929,59 @@ module.exports = function(app) {
     });
 };
 ```
+完成这一步之后，如何针对登录与非登录用户展示不同内容呢？或者说如何判断是否已登录，实际上就是判断用户的状态。
+这里就涉及到了会话（session）机制了,使用session记录用户登录状态，并且访问数据库保存和读取用户信息。
+
+##### 使用数据库
+之前我们已经选好了MongoDB作为本项目数据库，也已经安装好了。<br />
+
+想了解更多 MongoDB 的知识详情请查阅：http://www.mongodb.org.cn/
+
+##### 连接MongoDB
+之前我们虽然已经安装好并且启动成功了，但是我们需要连接上数据库后才能使用数据库。那么我们如何在NodeJs上使用MongoDB呢？
+这里我们就需要用到了官方的node-mongodb-native 驱动模块（其实还有更好的第三方驱动模块，以后再说），打开 package.json，在 dependencies 中添加一行：
+
+```javascript
+"mongodb": "~2.2.31"
+```
+然后运行 npm install 或 npm update 更新依赖的模块，稍等片刻后 mongodb 模块就下载并安装完成了。<br />
+
+接下来我们在项目的根目录下创建setting.js文件，用项目的一些配置信息，比如数据库连接信息。我们将数据库命名为microblog与项目名一致。setting.js文件内容如下：
+
+```javascript
+module.exports = {
+		db:"microblog",
+		host:"127.0.0.1",
+		port: 27017,
+		url: "mongodb://127.0.0.1:27017/microblog"
+};
+```
+其中 db 是数据库的名称，host 是数据库的地址，port是数据库的端口号，url 是数据库完整地址。<br /><br />
+
+接下来在根目录下新建 models 文件夹，并在 models 文件夹下新建 db.js ，添加如下代码：
+```javascript
+var settings = require("../settings"),
+Db = require('mongodb').Db,
+Server = require('mongodb').Server;
+
+module.exports = new Db(settings.db, new Server(settings.host, settings.port,{
+    socketOpations: { connectTimeoutMS: 500 },
+    poolSize: 10,
+    auto_reconnect: true
+}, {
+    numberOfRetries: 3,
+    retryMilliSeconds: 500
+}),{safe: true});
+
+```
+其中通过 new Db(settings.db, new Server(settings.host, settings.port,{
+    socketOpations: { connectTimeoutMS: 500 },
+    poolSize: 10,
+    auto_reconnect: true
+}, {
+    numberOfRetries: 3,
+    retryMilliSeconds: 500
+}),{safe: true}); 设置数据库名、
+数据库地址和数据库端口以及数据库连接池的一些参数配置创建了一个数据库连接实例，并通过 module.exports 导出该实例。这样，我们就可以通过 require 这个文件来对数据库进行读写了。
 
 
