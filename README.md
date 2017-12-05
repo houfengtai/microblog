@@ -840,6 +840,53 @@ The Result
   <li>duster</li>
 </ul>
 ```
+#### 开始搭建微博（microblog）
+##### 功能分析
+搭建一个简单的具有登陆、注册、发表文章、修改文章、删除文章、退出功能的microblog。
+
+##### 设计方向
+未登录：主页顶部显示标题、欢迎语、登陆、注册按钮，下边部分则显示已发表的文章以及作者和发表日期。<br />
+登录后：主页顶部显示标题、欢迎语、发表、退出按钮，下边部分则显示已发表的文章以及作者和发表日期。<br />
+用户登陆和注册和退出和发表文章成功后都跳转返回到首页。<br /><br />
+
+
+未登录时，主页如下：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/index_notlogin.png" />
+
+登陆页：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/login.png" />
+
+注册页：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/reg.png" />
+
+登录后，主页如下：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/index_yeslogin.png" />
+
+文章发表页面：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/push.png" />
+
+__注意：__
+没有登出页，当点击 LOGOUT 后，退出登陆并返回到主页，上面的页面比较丑，这不是本文重点，以后会专门写一些文章介绍大前端的，手把手教会编写漂亮页面。<br />
+html学习手册：http://www.w3school.com.cn/
+
+##### 路由规划
+
+我们上面已经构思好了设计图。接下来就是要规划路由了，路由是整个项目的的骨架部分，处在于核心位置，是页面与后台数据交互的转接点。所以我们需要优先考虑。<br />
+
+根据构思好的设计图，我们把路由规划成如下：
+```
+/:首页
+/login.html:登陆
+/reg.html:注册
+/push.html:文章发表
+/loginout:退出
+
+```
 
 
 
