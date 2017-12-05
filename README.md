@@ -1075,7 +1075,7 @@ app.get('/', function (req, res) {
         res.render('index', { title: '主页',user:null });
     });
 ```
-在/views目录下新建login.html代码如下：
+在/views目录下新建login.html（登录页）代码如下：
 ```html
 <!DOCTYPE html>
 <html>
@@ -1109,5 +1109,86 @@ app.get('/', function (req, res) {
   </body>
 </html>
 ```
+在/views目录下新建register.html（注册页）代码如下：
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+    h1{border-bottom:1px dotted #e5e5e5;padding-bottom:10px;}
+    .row{width:100%;height:35px;margin:15px 0px;}
+    .row span{display: inline-block;width:80px;text-align:right;height:35px;line-height:35px;color:#666;font-size:14px;margin-right:15px;}
+    .row input{border:1px solid #e5e5e5;border-radius:3px;color:#666;text-indent: 1em;width:200px;height:35px;line-height:35px;}
+    .row input:hover{border:1px solid #19a4e1;}
+    .but-sub{width:80px;height:35px;line-height:35px;text-align:center;border:1px solid #19a4e1;border-radius:3px;background:#19a4e1;cursor: pointer;color:#fff;font-size:14px;}
+	</style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div>
+    	<form action="/reg.do" method="post">
+    		<div class="row">
+	    		<span>用户名</span><input type="text" name="userName" placeholder="请输入用户名">
+    		</div>
+    		<div class="row">
+	    		<span>密码</span><input id="pwd1" class="pwd" name="password" type="password" placeholder="请输入密码">
+    		</div>
+    		<div class="row">
+	    		<span>确认密码</span><input id="pwd2" class="pwd" name="password-repeat" type="password" placeholder="请再次输入密码">
+    		</div>
+    		<div class="row">
+	    		<span>邮箱</span><input class="email" name="email" type="text" placeholder="请输入电子邮箱">
+    		</div>
+    		<div class="row">
+		    	<button class="but-sub" type="submit">注册</button>
+    		</div>
+    	</form>
+    </div>
+  </body>
+</html>
+```
+在/views目录下新建push_article.html（文章发表页）代码如下：
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+    h1{border-bottom:1px dotted #e5e5e5;padding-bottom:10px;}
+    .row{width:100%;height:35px;margin:15px 0px;}
+    .row span{display: inline-block;width:80px;text-align:left;height:35px;line-height:35px;color:#666;font-size:14px;margin-right:15px;}
+     input{border:1px solid #e5e5e5;border-radius:3px;color:#666;text-indent: 1em;width:620px;height:35px;line-height:35px;}
+     input:hover{border:1px solid #19a4e1;}
+     textarea{border:1px solid #e5e5e5;border-radius:3px;color:#666;font-size:14px;width:600px;height:250px;line-height:22px;resize:none;padding: 10px;}
+     textarea:hover{border:1px solid #19a4e1;}
+    .but-sub{width:80px;height:35px;line-height:35px;text-align:center;border:1px solid #19a4e1;border-radius:3px;background:#19a4e1;cursor: pointer;color:#fff;font-size:14px;}
+	</style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div>
+    	<form action="/push.do" method="post">
+    		<div class="row">
+	    		<span>标题</span>
+    		</div>
+    		<input type="text" name="title" placeholder="请输入文章标题">
+    		<div class="row">
+	    		<span>正文</span>
+    		</div>
+    		<textarea rows="" cols="" name="content" placeholder="请输入文章正文"></textarea>
+    		<!-- <div class="row">
+    		</div> -->
+    		<div class="row">
+		    	<button class="but-sub" type="submit">发布</button>
+    		</div>
+    	</form>
+    </div>
+  </body>
+</html>
+```
+
 
 
