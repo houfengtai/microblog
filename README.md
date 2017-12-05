@@ -1298,5 +1298,124 @@ User.get = function(name, callback) {
   });
 };
 ```
+这里通过 User.prototype.save 实现了用户信息的存储，通过 User.get 实现了用户信息的读取。<br />
 
+打开 /routes/index.js ，在最前面添加如下代码：
+```javascript
+var crypto = require('crypto'),User = require('../models/user.js');
+```
+
+通过 require() 引入 crypto 模块和 user.js 用户模型文件，crypto 是 NodeJs 的一个核心模块，我们用它生成散列值来加密密码。<br /><br />
+
+在 app.get('/reg.html', function (req, res) {
+        res.render('register', { title: '注册' });
+    }); 后面添加：
+
+```javascript
+
+/**
+     * 注册方法
+     */
+    app.post('/reg.do', function (req, res) {
+        var name = req.body.userName,
+            password = req.body.password,
+            password_re = req.body['password-repeat'];
+        //检验用户两次输入的密码是否一致
+        if (password_re != password) {
+            req.flash('error', '两次输入的密码不一致!');
+            return res.redirect('/reg.html');//返回注册页
+        }
+        //生成密码的 md5 值
+        var md5 = crypto.createHash('md5'),
+            password = md5.update(req.body.password).digest('hex');
+        var newUser = new User({
+            userName: name,
+            password: password,
+            email: req.body.email
+        });
+        //检查用户名是否已经存在
+        User.get(newUser.userName, function (err, user) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            if (user) {
+                req.flash('error', '用户已存在!');
+                return res.redirect('/reg.html');//返回注册页
+            }
+            //如果不存在则新增用户
+            newUser.save(function (err, user) {
+                if (err) {
+                    req.flash('error', err);
+                    return res.redirect('/reg.html');//注册失败返回主册页
+                }
+                req.session.user = user;//用户信息存入 session
+                req.flash('success', '注册成功!');
+                res.redirect('/');//注册成功后返回主页
+            });
+        });
+    });
+```
+
+__注意：__
+我们把用户信息存储在了 session 里，以后就可以通过 req.session.user 读取用户信息。<br />
+
+* req.body： 就是 POST 请求信息解析过后的对象，例如我们要访问 POST 来的表单内的 name="password" 域的值，只需访问 req.body['password'] 或 req.body.password 即可,当然也可以用req.param()获取数据。
+* res.redirect： 重定向功能，实现了页面的跳转，更多关于 res.redirect 的信息请查阅：http://expressjs.com/api.html#res.redirect 。
+* User：在前面的代码中，我们直接使用了 User 对象。User 是一个描述数据的对象，即 MVC 架构中的模型。前面我们使用了许多视图和控制器，这是第一次接触到模型。与视图和控制器不同，模型是真正与数据打交道的工具，没有模型，网站就只是一个外壳，不能发挥真实的作用，因此它是框架中最根本的部分。
+
+<br /><br />
+现在，启动应用，在浏览器输入 localhost:3000 注册试试吧！注册成功后显示如下：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/index_notlogin.png" />
+
+发现我们并不知道是否注册成功，我们查看数据库中是否存入了用户的信息，打开一个命令行切换到 mongodb/bin/ （注：保证数据库已打开的前提下，mongodb/bin/指MongoDB安装时的目录），输入：
+```
+mongo
+```
+回车 然后输入:
+```
+use microblog
+```
+回车 然后输入:
+```
+db.users.find({})
+```
+发现可以看到用户信息已经成功存入数据库。<br/>
+由于本文MongoDB是安装在Docker上的,命令有所不一样，但效果是一样的，如下图：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/mongo_find.png" />
+
+接下来我们实现当注册成功返回主页时，顶部会显示 "XXX，Welcome to 主页" 字样，即添加 flash 的页面通知功能。<br />
+
+打开/routes/index.js文件，把
+```javascript
+app.get('/', function (req, res) {
+        res.render('index', { title: '主页',user:null });
+    });
+```
+修改成
+```javascript
+app.get('/', function (req, res) {
+        res.render('index', { title: '主页',
+	user:req.session.user,
+	success: req.flash('success').toString(),
+	error: req.flash('error').toString()
+	});
+    });
+```
+将 app.get('/reg.html') 修改如下：
+
+```javascript
+app.get('/reg.html', function (req, res) {
+        res.render('register', { title: '注册',
+	user: req.session.user,
+	success: req.flash('success').toString(),
+	error: req.flash('error').toString()
+	});
+    });
+```
+然后我们再运行项目，注册成功后显示如下：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/reg_yes.png" />
 
