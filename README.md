@@ -1027,3 +1027,87 @@ app.use(session({
 ##### 页面设计
 主页/views/index.html代码修改如下：
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <style type="text/css">
+    a{text-decoration: none;display: inline-block;margin-right:15px;color:#666;font-size:14px;text-align:center;border:1px solid #e5e5e5;height:35px;width:100px;line-height:35px;border-radius:3px;}
+    a.login{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.reg:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.upload:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    .but-edit{display: inline-block;  height:30px;width:60px;border:1px solid #00B7FF;border-radius: 3px;line-height:30px;text-align: center;cursor: pointer;background: #19a4e1;color:#fff;}
+  </style>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<% if(user){ %>
+<p> <%= user.userName %>,Welcome to <%= title %></p>
+<%} else {%>
+<p>Welcome to <%= title %></p>
+<%}%>
+<div>
+  <% if(user){ %>
+  <a class="login" href="/push.html">发表</a>
+  <a class="reg" href="/loginout">退出</a>
+  <%} else {%>
+  <a class="login" href="/login.html">登录</a>
+  <a class="reg" href="/reg.html">注册</a>
+  <%}%>
+  <!--<a class="upload" href="/upload.html">上传头像</a>-->
+
+</div>
+</body>
+</html>
+```
+把/routes/index.js中的
+```javascript
+app.get('/', function (req, res) {
+        res.render('index', { title: '主页' });
+    });
+```
+替换成
+```javascript
+app.get('/', function (req, res) {
+        res.render('index', { title: '主页',user:null });
+    });
+```
+在/views目录下新建login.html代码如下：
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+    h1{border-bottom:1px dotted #e5e5e5;padding-bottom:10px;}
+    .row{width:100%;height:35px;margin:15px 0px;}
+    .row span{display: inline-block;width:80px;text-align:right;height:35px;line-height:35px;color:#666;font-size:14px;margin-right:15px;}
+    .row input{border:1px solid #e5e5e5;border-radius:3px;color:#666;text-indent: 1em;width:200px;height:35px;line-height:35px;}
+    .row input:hover{border:1px solid #19a4e1;}
+    .but-sub{width:80px;height:35px;line-height:35px;text-align:center;border:1px solid #19a4e1;border-radius:3px;background:#19a4e1;cursor: pointer;color:#fff;font-size:14px;}
+	</style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div>
+    	<form action="/login.do" method="post">
+    		<div class="row">
+	    		<span>用户名</span><input type="text" name="userName" placeholder="请输入用户名">
+    		</div>
+    		<div class="row">
+	    		<span>密码</span><input class="pwd" name="password" type="password" placeholder="请输入密码">
+    		</div>
+    		<div class="row">
+		    	<button class="but-sub" type="submit">登录</button>
+    		</div>
+    	</form>
+    </div>
+  </body>
+</html>
+```
+
+
