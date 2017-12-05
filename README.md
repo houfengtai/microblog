@@ -1190,5 +1190,113 @@ app.get('/', function (req, res) {
 </html>
 ```
 
+到此为止已经创建好了登录页面、注册页面以及发表文章页面，接下来重启一下项目看一下效果。<br /><br />
+
+##### 拓展
+每次我们更新代码后，都需要手动停止并重启应用，使用 supervisor 模块可以解决这个问题，每当我们保存修改的文件时，supervisor 都会自动帮我们重启应用。通过控制台：
+```
+npm install -g supervisor
+```
+全局安装 supervisor 。使用 supervisor 命令启动 app.js：
+```
+supervisor app
+```
+#### 页面通知
+接下来我们实现用户的注册和登陆，在这之前我们需要引入 flash 模块来实现页面通知（即成功与错误信息的显示）的功能。<br >
+
+什么是flash?<br />
+我们所说的 flash 即 connect-flash 模块 https://github.com/jaredhanson/connect-flash
+flash 是一个在 session 中用于存储信息的特定区域。信息写入 flash ，下一次显示完毕后即被清除。典型的应用是结合重定向的功能，确保信息是提供给下一个被渲染的页面。<br />
+
+在 package.json 添加一行代码：
+```javascript
+"connect-flash": "0.1.1"
+```
+然后 npm install 安装 connect-flash 模块。修改 app.js ，在 var settings = require('./settings'); 后添加：
+```javascript
+var flash = require('connect-flash');
+```
+在 app.use(logger('dev')); 之前添加：
+```javascript
+app.use(flash());
+```
+这样就可以使用flash功能了。
+
+#### 注册响应
+
+前面我们已经把注册页面创建好了，当然点击注册是没有任何反应的，那是因为还没对POST请求做出处理功能，下面我们来实现它。<br /><br />
+
+在/models目录下新建user.js文件，添加代码如下：
+```javascript
+var mongodb = require('./db');
+
+function User(user) {
+  this.userName = user.userName;
+  this.password = user.password;
+  this.email = user.email;
+};
+module.exports = User;
+
+//存储用户信息
+User.prototype.save = function(callback) {
+  //要存入数据库的用户文档
+  var user = {
+	  userName: this.userName,
+      password: this.password,
+      email: this.email
+  };
+  
+//打开数据库
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);//错误，返回 err 信息
+    }
+    //读取 users 集合
+    db.collection('users', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);//错误，返回 err 信息
+      }
+      //将用户数据插入 users 集合
+      collection.insert(user, {
+        safe: true
+      }, function (err, user) {
+        mongodb.close();
+        if (err) {
+          return callback(err);//错误，返回 err 信息
+        }
+        callback(null, user.ops[0]);//成功！err 为 null，并返回存储后的用户文档
+      });
+    });
+  });
+};
+
+//读取用户信息
+User.get = function(name, callback) {
+  //打开数据库
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);//错误，返回 err 信息
+    }
+    //读取 users 集合
+    db.collection('users', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);//错误，返回 err 信息
+      }
+      //查找用户名（name键）值为 name 一个文档
+      collection.findOne({
+        userName: name
+      }, function (err, user) {
+        mongodb.close();
+        if (err) {
+          return callback(err);//失败！返回 err 信息
+        }
+        callback(null, user);//成功！返回查询的用户信息
+      });
+    });
+  });
+};
+```
 
 
