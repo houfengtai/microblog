@@ -984,4 +984,46 @@ module.exports = new Db(settings.db, new Server(settings.host, settings.port,{
 }),{safe: true}); 设置数据库名、
 数据库地址和数据库端口以及数据库连接池的一些参数配置创建了一个数据库连接实例，并通过 module.exports 导出该实例。这样，我们就可以通过 require 这个文件来对数据库进行读写了。
 
+<br /><br />
+打开 app.js，在 var routes = require('./routes/index'); 下添加：
+```javascript
+var settings = require('./settings');
+```
+##### 会话支持
+
+>会话是一种持久的网络协议，用于完成服务器和客户端之间的一些交互行为。会话是一个比连接粒度更大的概念， 一次会话可能包含多次连接，每次连接都被认为是会话的一次操作。在网络应用开发中，有必要实现会话以帮助用户交互。例如网上购物的场景，用户浏览了多个页面，购买了一些物品，这些请求在多次连接中完成。许多应用层网络协议都是由会话支持的，如 FTP、Telnet 等，而 HTTP 协议是无状态的，本身不支持会话，因此在没有额外手段的帮助下，前面场景中服务器不知道用户购买了什么。为了在无状态的 HTTP 协议之上实现会话，Cookie 诞生了。Cookie 是一些存储在客户端的信息，每次连接的时候由浏览器向服务器递交，服务器也向浏览器发起存储 Cookie 的请求，依靠这样的手段服务器可以识别客户端。我们通常意义上的 HTTP 会话功能就是这样实现的。具体来说，浏览器首次向服务器发起请求时，服务器生成一个唯一标识符并发送给客户端浏览器，浏览器将这个唯一标识符存储在 Cookie 中，以后每次再发起请求，客户端浏览器都会向服务器传送这个唯一标识符，服务器通过这个唯一标识符来识别用户。 对于开发者来说，我们无须关心浏览器端的存储，需要关注的仅仅是如何通过这个唯一标识符来识别用户。很多服务端脚本语言都有会话功能，如 PHP，把每个唯一标识符存储到文件中。——《Node.js开发指南》
+
+express 也提供了会话中间件，默认情况下是把用户信息存储在内存中，但我们既然已经有了 MongoDB，不妨把会话信息存储在数据库中，
+便于持久维护。为了使用这一功能，我们需要借助 express-session 和 connect-mongo 这两个第三方中间件，在 package.json 中添加：
+```javascript
+"express-session": "1.15.4",
+"connect-mongo": "1.3.2"
+```
+
+运行npm install安装模块,打开app.js，在var settings = require('./settings'); 下添加以下代码：
+```javascript
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+```
+在 app.use(express.static(path.join(__dirname, 'public'))); 下添加以下代码：
+```javascript
+app.use(session({
+	  secret: settings.cookieSecret,
+	  key: settings.db,//cookie name
+	  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
+	  store: new MongoStore({
+	    db: settings.db,
+	    host: settings.host,
+	    port: settings.port,
+	    url: settings.url
+	  })
+	}));
+
+```
+使用 express-session 和 connect-mongo 模块实现了将会化信息存储到mongoldb中。secret 用来防止篡改 cookie，key 的值为 cookie 的名字，通过设置 cookie 的 maxAge 值设定 cookie 的生存期，
+这里我们设置 cookie 的生存期为 30 天，设置它的 store 参数为 MongoStore 实例，把会话信息存储到数据库中，以避免丢失。在后面的小节中，我们可以通过 req.session 获取当前用户的会话对象，获取用户的相关信息。
+
+#### 注册和登录
+##### 页面设计
+主页/views/index.html代码修改如下：
 
