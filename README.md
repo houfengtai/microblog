@@ -850,23 +850,23 @@ The Result
 用户登陆和注册和退出和发表文章成功后都跳转返回到首页。<br /><br />
 
 
-未登录时，主页如下：
+未登录时，主页（index.html）如下：
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/index_notlogin.png" />
 
-登陆页：
+登陆页（login.html）：
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/login.png" />
 
-注册页：
+注册页（register.html）：
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/reg.png" />
 
-登录后，主页如下：
+登录后，主页（index.html）如下：
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/index_yeslogin.png" />
 
-文章发表页面：
+文章发表页（push_article.html）：
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/push.png" />
 
