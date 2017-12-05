@@ -871,7 +871,7 @@ The Result
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/push.png" />
 
 __注意：__
-没有登出页，当点击 LOGOUT 后，退出登陆并返回到主页，上面的页面比较丑，这不是本文重点，以后会专门写一些文章介绍大前端的，手把手教会编写漂亮页面。<br />
+没有登出页，当点击 “退出” 后，退出登陆并返回到主页，上面的页面比较丑，这不是本文重点，以后会专门写一些文章介绍大前端的，手把手教会编写漂亮页面。<br />
 html学习手册：http://www.w3school.com.cn/
 
 ##### 路由规划
