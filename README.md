@@ -924,8 +924,8 @@ module.exports = function(app) {
     /**
      * 退出登录方法
      */
-    app.get('//loginout', function (req, res) {
-        res.redirect('/');//发表成功跳转到主页
+    app.get('/loginout', function (req, res) {
+        res.redirect('/');//退出成功跳转到主页
     });
 };
 ```
