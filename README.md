@@ -1735,3 +1735,128 @@ error: req.flash('error').toString()
 
 #### 发表文章
 
+现在我们的微博已经具备了用户注册、登陆、页面权限控制的功能，接下来我们完成微博最核心的部分——发表文章。在这一节，我们将会实现发表文章的功能，完成整个微博的设计。
+
+##### 文章模型
+前面我们已经写好了文章发表的页面（push_article.html）,接下来仿照用户模型，把文章模型命名为Article,它拥有与User相识的接口，分别是Article.get和Article.prototype.save。<br />
+
+Article.get 的功能是从数据库中获取文章，可以按指定用户获取，也可以获取全部的内容。<br />
+Article.prototype.save 是 Article 对象原型的方法，用来将文章保存到数据库。 <br />
+在 models 文件夹下新建 article.js ，添加如下代码：
+
+```javascript
+
+/**
+ * http://usejsdoc.org/
+ */
+var mongodb = require('./db');
+
+function Article(userName,title,content){
+	this.userName = userName;
+	this.title = title;
+	this.content = content;
+}
+
+module.exports = Article;
+
+//存储一篇文章及其相关信息
+Article.prototype.save = function(callback){
+	var date = new Date();
+	//存储各种时间格式，方便以后扩展
+	var time = {
+		date : date,
+		year : date.getFullYear(),
+		month : date.getFullYear() + "-" + (date.getMonth() + 1),
+		day : date.getFullYear() + "-" + (date.getMonth() + 1) + date.getDate(),
+		minute : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
+	      date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+	};
+	
+	//要存入数据库的文档
+	var article = {
+			userName : this.userName,
+			title : this.title,
+			content : this.content,
+			time : time
+	};
+	
+	//打开mongodb
+	mongodb.open(function(err , db){
+		if(err){
+			return callback(err);
+		};
+		//读取article集合
+		db.collection('articles',function(err , col){
+			if(err){
+				mongodb.close();
+				return callback(err);
+			};
+			//将文档插入 articles 集合
+			col.insert(article,{safe:true},function(err){
+				mongodb.close();
+				if(err){
+					return callback(err);
+				};
+				callback(null);
+			});
+		});
+	});
+};
+
+//读取文章及其相关信息
+Article.get = function(userName,callback){
+	//打开数据库
+	mongodb.open(function(err , db){
+		if(err){
+			return callback(err);
+		};
+		//读取article集合
+		db.collection('articles',function(err , col){
+			if(err){
+				mongodb.close();
+				return callback(err);
+			};
+			var query = {};
+			if(userName){
+				query.userName = userName;
+			};
+			//根据 query 对象查询文章
+			col.find(query).sort({time: -1}).toArray(function(err , docs){
+				mongodb.close();
+				if(err){
+					return callback(err);//失败！返回 err
+				};
+				callback(null, docs);//成功！以数组形式返回查询的结果
+			});
+		});
+	});
+};
+
+```
+
+##### 发表响应
+接下来我们实现文章发表功能，打开/routes/index.js 在顶部把 var crypto = require('crypto'),User = require('../models/user.js'); 改为：
+```javascript
+var crypto = require('crypto'),User = require('../models/user.js'),Article = require('../models/article.js');
+
+```
+在 app.get('/push.html') 下面添加：
+```javascript
+/**
+     * 文章发表方法
+     */
+    app.post('/push.do', checkLogin);
+    app.post('/push.do', function (req, res) {
+        var currentUser = req.session.user,
+            post = new Article(currentUser.userName, req.body.title, req.body.content);
+        post.save(function (err) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            req.flash('success', '发布成功!');
+            res.redirect('/');//发表成功跳转到主页
+        });
+    });
+
+```
