@@ -1957,4 +1957,70 @@ app.get('/', function (req, res) {
 的数据库链接（默认监听 localhost:27017），点击 Connect 就连接到数据库了。如图所示：
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/robo_db.png" />
+#### 编辑与删除文章
+上面我们已经完成了文章的发表功能，接下来我们添加文章编辑与删除功能。<br />
 
+设计：当用户登录成功后能够删除编辑和删除已发表的文章（暂时不考虑文章权限问题,每个登录用户都能操作），编辑文章时我们设定暂时只修改文章的内容，标题不做改变。<br /><br />
+
+
+现在我们开始做文章编辑功能，打开/views/index.html文件，修改成如下：
+
+```html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+    a{text-decoration: none;display: inline-block;margin-right:15px;color:#666;font-size:14px;text-align:center;border:1px solid #e5e5e5;height:35px;width:100px;line-height:35px;border-radius:3px;}
+    a.login{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.reg:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.upload:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+	.but-edit{display: inline-block;  height:30px;width:60px;border:1px solid #00B7FF;border-radius: 3px;line-height:30px;text-align: center;cursor: pointer;background: #19a4e1;color:#fff;}
+	</style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+	<!--<p>总注册人数： <%= count %></p>-->
+    <% if(user){ %>
+    	<p>Welcome to <%= user.userName %></p>
+    <%}%>
+    <div>
+    	<% if(user){ %>
+	    	<a class="login" href="/push.html">发表</a>
+	    	<a class="reg" href="/loginout">退出</a>
+    	<%} else {%>
+	    	<a class="login" href="/login.html">登录</a>
+	    	<a class="reg" href="/reg.html">注册</a>
+    	<%}%>
+		<a class="upload" href="/upload.html">上传头像</a>
+    	
+    	
+    </div>
+    <% if(success){ %>
+    	<div style="color:red;margin-top:30px;"><%=success%></div>
+    <%}%>
+    <% articles.forEach(function (article, index) { %>
+	  <p><h2><span><%= article.title %></span></h2></p>
+	  <p class="info">
+	    作者：<span><%= article.userName %></span> | 
+	    日期：<%= article.time.minute %>
+	  </p>
+	  <p><%- article.content %></p>
+	  <span class="but-edit" onclick="editArticle('<%= article._id %>')">修改</span>
+	  <span class="but-edit" onclick="delArticle('<%= article._id %>')">删除</span>
+	<% }) %>
+  </body>
+</html>
+<script>
+	function editArticle(id){
+	    window.open("/edit/article.html?objId="+id);
+	}
+	function delArticle(id){
+	    window.location.href = "/del/article.html?objId="+id;
+	}
+</script>
+
+```
