@@ -1519,6 +1519,7 @@ app.get('/loginout', function (req, res) {
 <%} else {%>
 <p>Welcome to <%= title %></p>
 <%}%>
+<% if(success){ %><div class="tips"><%= success%></div><%}%>
 <div>
   <% if(user){ %>
   <a class="login" href="/push.html">发表</a>
@@ -1528,7 +1529,6 @@ app.get('/loginout', function (req, res) {
   <a class="reg" href="/reg.html">注册</a>
   <%}%>
   <!--<a class="upload" href="/upload.html">上传头像</a>-->
-  <% if(user){ %><div class="tips"><%= success%></div><%}%>
 </div>
 </body>
 </html>
