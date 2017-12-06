@@ -1415,6 +1415,12 @@ app.get('/reg.html', function (req, res) {
 	});
     });
 ```
+打开/routes/register.html文件，在 <h1><%= title %></h1> 下添加：
+```html
+<% if(error){ %>
+    	<div style="color:red;margin-top:15px;"><%=error%></div>
+    <%}%>
+```
 然后我们再运行项目，注册成功后显示如下：
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/reg_yes.png" />
@@ -1487,4 +1493,46 @@ app.get('/loginout', function (req, res) {
 });
 
 ```
+实现退出功能非常简单，只有一行代码：req.session.user = null; 把session中的user赋值为 null ，丢弃掉用户信息即可。
+
+把/views/index.html 修改成如下（接收一下success消息）：
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <style type="text/css">
+    a{text-decoration: none;display: inline-block;margin-right:15px;color:#666;font-size:14px;text-align:center;border:1px solid #e5e5e5;height:35px;width:100px;line-height:35px;border-radius:3px;}
+    a.login{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.reg:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.upload:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    .but-edit{display: inline-block;  height:30px;width:60px;border:1px solid #00B7FF;border-radius: 3px;line-height:30px;text-align: center;cursor: pointer;background: #19a4e1;color:#fff;}
+    .tips{color: red;height: 35px;margin: 5px 0px;}
+  </style>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<% if(user){ %>
+<p> <%= user.userName %>,Welcome to <%= title %></p>
+<%} else {%>
+<p>Welcome to <%= title %></p>
+<%}%>
+<div>
+  <% if(user){ %>
+  <a class="login" href="/push.html">发表</a>
+  <a class="reg" href="/loginout">退出</a>
+  <%} else {%>
+  <a class="login" href="/login.html">登录</a>
+  <a class="reg" href="/reg.html">注册</a>
+  <%}%>
+  <!--<a class="upload" href="/upload.html">上传头像</a>-->
+  <% if(user){ %><div class="tips"><%= success%></div><%}%>
+</div>
+</body>
+</html>
+
+```
+
 
