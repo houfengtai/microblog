@@ -2023,3 +2023,165 @@ app.get('/', function (req, res) {
 
 
 ```
+至此，我们已经在每篇文章下面添加了“修改”和“删除”两个按钮，并且注册了两个响应跳转方法。<br />
+
+接下来，打开/models/article.js ，
+在 var mongodb = require('./db'); 前面添加：
+```javascript
+const ObjectID = require('mongodb').ObjectID;
+```
+
+在最后添加代码如下：
+
+```javascript
+Article.findById = function(id, callback) {
+    //打开数据库
+    mongodb.open(function (err, db) {
+        if (err) {
+            return callback(err);
+        }
+        //读取 articles 集合
+        db.collection('articles', function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            //根据ID进行查询
+            collection.findOne({_id: new ObjectID(id)}, function (err, doc) {
+                mongodb.close();
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, doc);//返回查询的一篇文章
+            });
+        });
+    });
+};
+
+```
+打开/routes/index.js ，在 app.post('/push.do') 后面添加如下:
+```javascript
+/**
+     * 文章编辑跳转页面
+     */
+    app.get('/edit/article.html',checkLogin);
+    app.get('/edit/article.html',function(req, res){
+        var _id = req.param("objId");
+        Article.findById(_id,function(err,doc){
+            if(err){
+                doc = null;
+            };
+            console.log(JSON.stringify(doc));
+            res.render("edit_article",{article:doc});
+        })
+    });
+
+```
+在/views目录下新建edit_article.html ，添加如下代码：
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>文章修改</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+    h1{border-bottom:1px dotted #e5e5e5;padding-bottom:10px;}
+    .row{width:100%;height:35px;margin:15px 0px;}
+    .row span{display: inline-block;width:80px;text-align:left;height:35px;line-height:35px;color:#666;font-size:14px;margin-right:15px;}
+     input{border:1px solid #e5e5e5;border-radius:3px;color:#666;text-indent: 1em;width:620px;height:35px;line-height:35px;}
+     input:hover{border:1px solid #19a4e1;}
+     textarea{border:1px solid #e5e5e5;border-radius:3px;color:#666;font-size:14px;width:600px;height:250px;line-height:22px;resize:none;padding: 10px;}
+     textarea:hover{border:1px solid #19a4e1;}
+    .but-sub{width:80px;height:35px;line-height:35px;text-align:center;border:1px solid #19a4e1;border-radius:3px;background:#19a4e1;cursor: pointer;color:#fff;font-size:14px;}
+	</style>
+  </head>
+  <body>
+    <h1>文章修改</h1>
+    <div>
+    	<form action="/edit/article.do" method="post">
+    		<div class="row">
+	    		<span>标题</span>
+    		</div>
+			<input type="hidden" name="_id" value="<%= article._id%>">
+    		<input type="text" name="title" value="<%= article.title%>" placeholder="请输入文章标题">
+    		<div class="row">
+	    		<span>正文</span>
+    		</div>
+    		<textarea rows="" cols="" name="content" placeholder="请输入文章正文"><%= article.content%></textarea>
+    		<!-- <div class="row">
+    		</div> -->
+    		<div class="row">
+		    	<button class="but-sub" type="submit">保存</button>
+    		</div>
+    	</form>
+    </div>
+  </body>
+</html>
+
+```
+现在，运行我们的项目看看吧。在文章下面，当我们点击 修改 后就会跳转到该文章对应的编辑页面了。接下来我们实现将修改后的文章提交到数据库。
+
+打开/models/article.js ，在最后面添加：
+```javascript
+Article.update = function (req, res,callback) {
+    var _id = req.body._id;
+    console.log(_id);
+    var date = new Date();
+    //存储各种时间格式，方便以后扩展
+    var time = {
+        date : date,
+        year : date.getFullYear(),
+        month : date.getFullYear() + "-" + (date.getMonth() + 1),
+        day : date.getFullYear() + "-" + (date.getMonth() + 1) + date.getDate(),
+        minute : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +
+        date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+    };
+    var data = {$set:{content : req.body.content, time : time}};
+
+    //打开数据库
+    mongodb.open(function (err, db) {
+        if (err) {
+            return callback(err);
+        }
+        //读取 articles 集合
+        db.collection('articles', function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            //根据ID进行查询
+            collection.update({_id: new ObjectID(_id)},data, function (err) {
+                mongodb.close();
+                if (err) {
+                    return callback(err);
+                }
+                callback(null);//成功！返回查询的信息
+            });
+        });
+    });
+}
+
+```
+打开 /routes/index.js ，在 app.get('/edit/article.html') 后面添加如下代码：
+
+```javascript
+
+/**
+     * 文章编辑功能
+     */
+    app.post('/edit/article.do',checkLogin);
+    app.post('/edit/article.do', function(req,res){
+        Article.update(req,res,function(err){
+            if(err){
+                return  res.render("error");
+            };
+	    req.flash('success', '修改成功!');
+            res.redirect("/");
+        })
+    });
+
+ ```
+现在，我们就可以编辑并保存文章了。赶紧试试吧！<br /><br />
+
+
+
