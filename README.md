@@ -1950,7 +1950,7 @@ app.get('/', function (req, res) {
 #### 拓展
 使用图形化工具管理MongoDB。对于数据量大的或者不熟悉习惯使用命令的童鞋来说，有一款图形化工具是多么好的选择。
 在这里给大家推荐一款叫做的Robo 3T的软件。这是一个基于 Shell 的跨平台开源 MongoDB 管理工具。嵌入了 JavaScript 
-引擎和 MongoDB mongo 。只要你会使用 mongo shell ，你就会使用 Robomongo，它提供语法高亮、自动完成、差别视图等。
+引擎和 MongoDB mongo 。只要你会使用 mongo shell ，你就会使用 Robo 3T，它提供语法高亮、自动完成、差别视图等。
 <br /><br />
 
 下载安装 Robo 3T后，运行我们的项目，注册一个用户并发表几篇文章，初次打开 Robo 3T ，点击 Create 创建一个名为 microblog （名字自定）
