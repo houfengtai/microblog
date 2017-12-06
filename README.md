@@ -1,4 +1,4 @@
-# NodeJs+Express+MongoDb最新教程（零基础入门到精通）
+# NodeJs+Express+MongoDb新教程（零基础入门到精通）
 ## NodeJs 零基础快速搭建一个microblog网站项目
 
 ### 前言
