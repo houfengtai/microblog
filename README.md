@@ -1860,3 +1860,101 @@ var crypto = require('crypto'),User = require('../models/user.js'),Article = req
     });
 
 ```
+最后，我们修改 /views/index.html ，让主页底部显示发表过的文章及其相关信息。<br /><br />
+
+打开 /views/index.html ，修改如下：
+```html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <style type="text/css">
+    a{text-decoration: none;display: inline-block;margin-right:15px;color:#666;font-size:14px;text-align:center;border:1px solid #e5e5e5;height:35px;width:100px;line-height:35px;border-radius:3px;}
+    a.login{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.reg:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    a.upload:hover{border:1px solid #19a4e1;color:#fff;background:#19a4e1;}
+    .but-edit{display: inline-block;  height:30px;width:60px;border:1px solid #00B7FF;border-radius: 3px;line-height:30px;text-align: center;cursor: pointer;background: #19a4e1;color:#fff;}
+    .tips{color: red;height: 35px;margin: 5px 0px;}
+  </style>
+</head>
+<body>
+<h1><%= title %></h1>
+
+<% if(user){ %>
+<p> <%= user.userName %>,Welcome to <%= title %></p>
+<%} else {%>
+<p>Welcome to <%= title %></p>
+<%}%>
+<% if(success){ %><div class="tips"><%= success%></div><%}%>
+<div>
+  <% if(user){ %>
+  <a class="login" href="/push.html">发表</a>
+  <a class="reg" href="/loginout">退出</a>
+  <%} else {%>
+  <a class="login" href="/login.html">登录</a>
+  <a class="reg" href="/reg.html">注册</a>
+  <%}%>
+  <!--<a class="upload" href="/upload.html">上传头像</a>-->
+</div>
+<% articles.forEach(function (article, index) { %>
+<p><h2><span><%= article.title %></span></h2></p>
+<p class="info">
+  作者：<span><%= article.userName %></span> |
+  日期：<%= article.time.minute %>
+</p>
+<p><%- article.content %></p>
+<% }) %>
+</body>
+</html>
+
+```
+
+打开/routes/index.js文件，把：
+```javascript
+
+app.get('/', function (req, res) {
+        res.render('index', { title: '主页',
+            user:req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+ ```
+ 修改成：
+ ```javascript
+ app.get('/', function (req, res) {
+        Article.get(null,function(err,articles){
+            if(err){
+                articles = [];
+            }
+            res.render('index', { title: '主页',
+                user:req.session.user,
+                articles:articles,
+                success: req.flash('success').toString(),
+                error: req.flash('error').toString()
+            });
+        })
+    });
+ ```
+ 至此，我们的项目就建成了。<br />
+ 接下来我们重启一下项目，发表一篇文章，效果如下：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/blog_list.png" />
+
+接下来我们查看一下数据库：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/articles_db.png" />
+
+#### 拓展
+使用图形化工具管理MongoDB。对于数据量大的或者不熟悉习惯使用命令的童鞋来说，有一款图形化工具是多么好的选择。
+在这里给大家推荐一款叫做的Robo 3T的软件。这是一个基于 Shell 的跨平台开源 MongoDB 管理工具。嵌入了 JavaScript 
+引擎和 MongoDB mongo 。只要你会使用 mongo shell ，你就会使用 Robomongo，它提供语法高亮、自动完成、差别视图等。
+<br /><br />
+
+下载安装 Robo 3T后，运行我们的项目，注册一个用户并发表几篇文章，初次打开 Robo 3T ，点击 Create 创建一个名为 microblog （名字自定）
+的数据库链接（默认监听 localhost:27017），点击 Connect 就连接到数据库了。如图所示：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/robo_db.png" />
+
