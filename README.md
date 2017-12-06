@@ -1419,3 +1419,72 @@ app.get('/reg.html', function (req, res) {
 
 <img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/reg_yes.png" />
 
+我们通过session的使用实现了对用户状态的检查，再根据不同的用户状态显示不同的按钮信息。说一下大体流程：
+用户注册成功后，把用户信息保存到session，页面跳转到主页，显示 XXX,Welcom to 主页 的字样。同时把session的信息
+赋值给了user，在渲染 index.html 文件时通过检测 user 判断用户是否在线，根据用户状态的不同显示不同的按钮信息。
+
+<br /><br />
+
+success：req.flash('success').toString() 的意思是把成功的信息赋值给变量success <br />
+error: req.flash('error').toString() 的意思是将错误的信息赋值给变量 error <br />
+然后我们在渲染 ejs 模版文件时传递这两个变量来进行检测并显示通知。
+
+#### 登录与退出响应
+
+现在实现用户登录功能。<br />
+
+打开/routes/index.js 在 app.get('/login.html') 下添加一下代码：
+```javascript
+/**
+     * 登录方法
+     */
+    app.post('/login', function (req, res) {
+        //生成密码的 md5 值
+        var md5 = crypto.createHash('md5'),
+            password = md5.update(req.body.password).digest('hex');
+        //检查用户是否存在
+        User.get(req.body.userName, function (err, user) {
+            if (!user) {
+                req.flash('error', '用户不存在!');
+                return res.redirect('/login.html');//用户不存在则跳转到登录页
+            }
+            //检查密码是否一致
+            if (user.password != password) {
+                req.flash('error', '密码错误!');
+                return res.redirect('/login.html');//密码错误则跳转到登录页
+            }
+            //用户名密码都匹配后，将用户信息存入 session
+            req.session.user = user;
+            req.flash('success', '登陆成功!');
+            res.redirect('/');//登陆成功后跳转到主页
+        });
+    });
+
+```
+将 app.get('/login.html') 修改成如下：
+
+```javascript
+
+app.get('/login.html', function (req, res) {
+        res.render('login', { title: '登录',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+
+```
+这样就不会出现 'user is not defined' 的错误了（ejs的标签相对于jsp来说稍微弱了）。<br />
+
+接下来是实现退出功能：<br />
+把 app.set("/loginout") 修改成如下：
+
+```javascript
+app.get('/loginout', function (req, res) {
+  req.session.user = null;
+  req.flash('success', '退出成功!');
+  res.redirect('/');//退出成功后跳转到主页
+});
+
+```
+
