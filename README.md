@@ -1534,5 +1534,204 @@ app.get('/loginout', function (req, res) {
 </html>
 
 ```
+登录成功后页面如下：
 
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/login_yes.png" />
+
+退出成功后页面如下：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/login_out.png" />
+
+目前，我们已经实现了注册、登录功能，同时根据不同的登录状态显示不同的按钮。
+
+#### 页面控制
+
+虽然我们上面已经实现了登录注册功能，但是并不能阻止比如已登录的用户再次访问注册页面 http://localhost:3000/reg.html ,这样有可能就会造成重复注册或登录。
+为此，我们是要控制访问页面的权限。即注册和登录页面应该阻止已登录的用户访问，退出后以及之后我们需要实现的发表、修改和删除文章只对已登录的用户访问。
+这需要如何控制呢？我们只需要把用户登录状态的检查放到路由中间件中，在每个路径前增加路由中间件，即可实现页面权限控制。我们增加checkNotLogin（判断没有登录）和checkLogin（判断已登录）
+两个函数来实现这个功能。
+
+```javascript
+
+function checkLogin(req, res, next) {
+  if (!req.session.user) {
+    req.flash('error', '未登录!'); 
+    res.redirect('/login.html');
+  } else{
+	next();
+  }
+  
+}
+
+function checkNotLogin(req, res, next) {
+  if (req.session.user) {
+    req.flash('error', '已登录!'); 
+    res.redirect('back');//返回之前的页面
+  } else{
+	next();
+  }
+}
+
+```
+checkNotLogin 和 checkLogin 用来检测是否登陆，并通过 next() 转移控制权，检测到未登录则跳转到登录页，检测到已登录则跳转到前一个页面。<br />
+
+最终/routes/index.js 文件代码如下：
+```javascript
+
+var crypto = require('crypto'),User = require('../models/user.js');
+
+module.exports = function(app) {
+    /**
+     * 主页
+     */
+    app.get('/', function (req, res) {
+        res.render('index', { title: '主页',
+            user:req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+
+    /**
+     * 登录跳转页面
+     */
+    app.get('/login.html', checkNotLogin);
+    app.get('/login.html', function (req, res) {
+        res.render('login', { title: '登录',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+
+    /**
+     * 登录方法
+     */
+    app.post('/login.do', checkNotLogin);
+    app.post('/login.do', function (req, res) {
+        //生成密码的 md5 值
+        var md5 = crypto.createHash('md5'),
+            password = md5.update(req.body.password).digest('hex');
+        //检查用户是否存在
+        User.get(req.body.userName, function (err, user) {
+            if (!user) {
+                req.flash('error', '用户不存在!');
+                return res.redirect('/login.html');//用户不存在则跳转到登录页
+            }
+            //检查密码是否一致
+            if (user.password != password) {
+                req.flash('error', '密码错误!');
+                return res.redirect('/login.html');//密码错误则跳转到登录页
+            }
+            //用户名密码都匹配后，将用户信息存入 session
+            req.session.user = user;
+            req.flash('success', '登陆成功!');
+            res.redirect('/');//登陆成功后跳转到主页
+        });
+    });
+
+    /**
+     * 注册跳转页面
+     */
+    app.get('/reg.html', checkNotLogin);
+    app.get('/reg.html', function (req, res) {
+        res.render('register', { title: '注册',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+
+    /**
+     * 注册方法
+     */
+    app.post('/reg.do', checkNotLogin);
+    app.post('/reg.do', function (req, res) {
+        var name = req.body.userName,
+            password = req.body.password,
+            password_re = req.body['password-repeat'];
+        //检验用户两次输入的密码是否一致
+        if (password_re != password) {
+            req.flash('error', '两次输入的密码不一致!');
+            return res.redirect('/reg.html');//返回注册页
+        }
+        //生成密码的 md5 值
+        var md5 = crypto.createHash('md5'),
+            password = md5.update(req.body.password).digest('hex');
+        var newUser = new User({
+            userName: name,
+            password: password,
+            email: req.body.email
+        });
+        //检查用户名是否已经存在
+        User.get(newUser.userName, function (err, user) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            if (user) {
+                req.flash('error', '用户已存在!');
+                return res.redirect('/reg.html');//返回注册页
+            }
+            //如果不存在则新增用户
+            newUser.save(function (err, user) {
+                if (err) {
+                    req.flash('error', err);
+                    return res.redirect('/reg.html');//注册失败返回主册页
+                }
+                req.session.user = user;//用户信息存入 session
+                req.flash('success', '注册成功!');
+                res.redirect('/');//注册成功后返回主页
+            });
+        });
+    });
+
+    /**
+     * 文章发表跳转页面
+     */
+    app.get('/push.html', checkLogin);
+    app.get('/push.html', function (req, res) {
+        res.render('push_article', { title: '发表' });
+    });
+
+    /**
+     * 退出登录方法
+     */
+    app.get('/loginout', checkLogin);
+    app.get('/loginout', function (req, res) {
+        req.session.user = null;
+        req.flash('success', '退出成功!');
+        res.redirect('/');//退出成功跳转到主页
+    });
+
+    function checkLogin(req, res, next) {
+        if (!req.session.user) {
+            req.flash('error', '未登录!');
+            res.redirect('/login.html');
+        } else{
+            next();
+        }
+    }
+
+    function checkNotLogin(req, res, next) {
+        if (req.session.user) {
+            req.flash('error', '已登录!');
+            res.redirect('back');//返回之前的页面
+        } else{
+            next();
+        }
+    }
+};
+
+```
+
+注意：为了维护用户状态和 flash 的通知功能，我们给每个 ejs 模版文件传入了以下三个值：
+
+```javascript
+user: req.session.user,
+success: req.flash('success').toString(),
+error: req.flash('error').toString()
+```
+
+#### 发表文章
 
