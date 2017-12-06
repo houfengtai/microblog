@@ -1,4 +1,4 @@
-# NodeJs+Express+MongoDb新教程（零基础入门到精通）
+# NodeJs+Express+MongoDb全新教程（零基础入门到精通）
 ## NodeJs 零基础快速搭建一个microblog网站项目
 
 ### 前言
@@ -6,7 +6,9 @@
 此项目功能比较简单：只有登录、注册、退出、发表文章、修改文章、删除文章、上传图片这些功能。
 <br />
 __注：此项目为入门级别，大神可以飘过，有不足之处请多多指教__
-<br /><br />参考于[使用 Express + MongoDB 搭建多人博客](http://wiki.jikexueyuan.com/project/express-mongodb-setup-blog)
+<br /><br />
+项目源码地址： https://github.com/houfengtai/microblog.git
+<br />参考于[使用 Express + MongoDB 搭建多人博客](http://wiki.jikexueyuan.com/project/express-mongodb-setup-blog)
 <br />
 #### 技术栈
 NodeJs8.9.1 + Express4.15.5 + MongoDB3.4
@@ -2183,5 +2185,66 @@ Article.update = function (req, res,callback) {
  ```
 现在，我们就可以编辑并保存文章了。赶紧试试吧！<br /><br />
 
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/article_edit.png" />
 
+接下来，我们实现删除文章的功能。打开 /models/article.js ，在最后添加如下代码：
+```javascript
+
+//删除一篇文章
+Article.removeById = function(id, callback) {
+    //打开数据库
+    mongodb.open(function (err, db) {
+        if (err) {
+            return callback(err);
+        }
+        //读取 articles 集合
+        db.collection('articles', function (err, collection) {
+            if (err) {
+                mongodb.close();
+                return callback(err);
+            }
+            //根据ID查找并删除一篇文章
+            collection.remove({_id: new ObjectID(id)}, {
+                w: 1
+            }, function (err) {
+                mongodb.close();
+                if (err) {
+                    return callback(err);
+                }
+                callback(null);
+            });
+        });
+    });
+};
+
+```
+打开/routes/index.js ，在 app.post('/edit/article.do') 后面添加以下代码：
+```javascript
+
+/**
+     * 文章删除功能
+     */
+    app.get('/del/article.html',checkLogin);
+    app.get('/del/article.html',function(req,res){
+        var _id = req.param("objId");
+        Article.removeById(_id,function(err){
+            if(err){
+                return  res.render("error",{message :err});
+            };
+            req.flash('success', '删除成功!');
+            res.redirect("/");
+        })
+    });
+
+```
+重启一下我们的项目，登录后选择点击文章下面的 删除 按钮，效果如下：
+
+<img src="https://raw.githubusercontent.com/houfengtai/microblog/master/demoImg/del.png" />
+
+至此，我们整个项目已经开发完成，如果你能根据本文的所有代码都自己编写一次，相信你对NodeJs已经有大体的了解了，自己也能构建一个简单的网站了。
+当然本文是以最基本的CRUD进行讲解的，在现实项目中是比这个复杂非常非常多的。
+
+### 高手进阶
+在上面我们开发了一个简单的microblog，对于真正的项目来说是非常简陋的，使用的技术也不多，项目结构也是混乱不堪。接下来，开始讲解一下如何对项目进行架构封装，使开发变得更加有条理，结构更加明了，代码简洁。
+由于时间关系，这个就留到下一章《程序员的架构之路》。
 
