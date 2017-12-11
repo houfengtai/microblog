@@ -31,5 +31,44 @@ node ./bin/www
 在上面我们开发了一个简单的microblog，对于真正的项目来说是非常简陋的，使用的技术也不多，项目结构也是混乱不堪。接下来，开始讲解一下如何对项目进行架构封装，使开发变得更加有条理，结构更加明了，代码简洁。这个就留到下一章《程序员的架构之路》。
 
 ```javascript
-app.get('/', indexController.indexPage);
+var crypto = require('crypto'), User = require('../models/user.js');
+
+function loginController(){};
+module.exports = loginController;
+
+/**
+ * 登录跳转页面
+ */
+loginController.loginPage = function(req,res){
+    res.render('login', { title: '登录',
+        user: req.session.user,
+        success: req.flash('success').toString(),
+        error: req.flash('error').toString()
+    });
+}
+
+/**
+ * 登录方法
+ */
+loginController.login = function(req,res){
+    //生成密码的 md5 值
+    var md5 = crypto.createHash('md5'),
+        password = md5.update(req.body.password).digest('hex');
+    //检查用户是否存在
+    User.get(req.body.userName, function (err, user) {
+        if (!user) {
+            req.flash('error', '用户不存在!');
+            return res.redirect('/login.html');//用户不存在则跳转到登录页
+        }
+        //检查密码是否一致
+        if (user.password != password) {
+            req.flash('error', '密码错误!');
+            return res.redirect('/login.html');//密码错误则跳转到登录页
+        }
+        //用户名密码都匹配后，将用户信息存入 session
+        req.session.user = user;
+        req.flash('success', '登陆成功!');
+        res.redirect('/');//登陆成功后跳转到主页
+    });
+}
 ```
