@@ -31,5 +31,5 @@ node ./bin/www
 在上面我们开发了一个简单的microblog，对于真正的项目来说是非常简陋的，使用的技术也不多，项目结构也是混乱不堪。接下来，开始讲解一下如何对项目进行架构封装，使开发变得更加有条理，结构更加明了，代码简洁。这个就留到下一章《程序员的架构之路》。
 
 ```javascript
-const loginController = require("../controller/loginController.js");
+app.get('/login.html', loginController.loginPage);
 ```
