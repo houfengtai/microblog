@@ -29,5 +29,49 @@ node ./bin/www
 
 ### 高手进阶
 在上面我们开发了一个简单的microblog，对于真正的项目来说是非常简陋的，使用的技术也不多，项目结构也是混乱不堪。接下来，开始讲解一下如何对项目进行架构封装，使开发变得更加有条理，结构更加明了，代码简洁。这个就留到下一章《程序员的架构之路》。
+```javascript
+/**
+ * 服务层实现类
+ * Created by hou
+ */
+const ObjectID = require('mongodb').ObjectID;
+const mongodb = require('./db');
 
+function baseService(){};
+module.exports = baseService;
+
+/**
+ * @title :保存数据-方法
+ * @author hou
+ * @param {String}collectionName 数据库表名称-String
+ * @param {Object}data 集合对象-json or array
+ * @param {function(err,data)}callback 回调函数-function
+ */
+baseService.prototype.insert = function(collectionName,data,callback){
+    if(collectionName===""||collectionName===null||collectionName===undefined) return callback(collectionName+"集合不存在!");
+    if(data===""||data===null||data===undefined) return callback(data+"数据不能为空!");
+
+    //打开mongodb
+    mongodb.open(function(err , db){
+        if(err){
+            return callback(err);
+        };
+        //读取 指定 集合
+        db.collection(collectionName,function(err , col){
+            if(err){
+                mongodb.close();
+                return callback(err);
+            };
+            //将文档插入 指定 集合
+            col.insert(data,{safe:true},function(err){
+                mongodb.close();
+                if(err){
+                    return callback(err);
+                };
+                callback(null);
+            });
+        });
+    });
+}
+```
 
